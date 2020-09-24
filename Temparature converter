@@ -1,0 +1,150 @@
+#include <iostream>
+using namespace std;
+typedef unsigned short int USHORT;
+
+//global variables
+float Cel_temp, Faren_temp, Kel_temp, curr_temp;
+USHORT menu_input;
+
+//funtion prototypes
+float CeltoFar(float);
+float CeltoKel(float);
+float FartoCel(float);
+float FartoKel(float);
+float Kel_to_Cel(float);
+float Kel_to_Far(float);
+
+//input system
+float input_sys (USHORT menu_input){
+  USHORT input = menu_input;
+  if (input == 1 || input == 2 || input == 3|| input ==4 || input == 5||
+  input == 6){ //prevents errors
+    if(input == 1){
+      cout << "\n  Enter the temprature in Celcius: ";
+      cin >> Cel_temp;
+      float farenheit_temp;
+      farenheit_temp =  CeltoFar(Cel_temp);
+      return farenheit_temp;
+    }
+    if (input == 2){
+      cout << "\n  Enter the temprature in Celcius: ";
+      cin >> Cel_temp;
+      float kelvin_temprature;
+      kelvin_temprature = CeltoKel(Cel_temp);
+      return kelvin_temprature;
+    }
+    if (input == 3){
+      cout << "\n  Enter the temprature in Farenheit: ";
+      cin >> Faren_temp;
+      float celcius_temp;
+      celcius_temp = FartoCel(Faren_temp);
+      return celcius_temp;
+    }
+    if (input == 4){
+      cout << "\n  Enter the temprature in Farenheit: ";
+      cin >> Faren_temp;
+      float kelvin_temp;
+      kelvin_temp = FartoKel(Faren_temp);
+      return kelvin_temp;
+    }
+    if (input == 5){
+      cout << "\n  Enter the temprature in Kelvin: ";
+      cin >> Kel_temp;
+      float celcius_temp;
+      celcius_temp = Kel_to_Cel(Kel_temp);
+      return celcius_temp;
+    }
+    if (input == 6){
+      cout << "\n  Enter the tempratue in Kelvin: ";
+      cin >> Kel_temp;
+      float farenheit_temp;
+      farenheit_temp = Kel_to_Far(Kel_temp);
+      return farenheit_temp;
+    }
+  }
+  // deals with exceptions
+  else{
+    cout << "This input is not valid." << endl;
+  }
+}
+
+//converter functions
+float CeltoFar (float Cel_temp){
+  float celcius_temp = Cel_temp;
+  float farenheit_temp = (celcius_temp * 9 / 5) + 32;
+  return farenheit_temp;
+}
+
+float CeltoKel (float Cel_temp){
+  float celcius_temp = Cel_temp;
+  float kelvin_temp = celcius_temp + 273.15;
+  return kelvin_temp;
+}
+
+float FartoCel (float Faren_temp){
+  float farenheit_temp = Faren_temp;
+  float celcius_temp = (farenheit_temp - 32 ) * 5 / 9;
+  return celcius_temp;
+}
+
+float FartoKel (float Faren_temp){
+  float celcius_temp, kelvin_temp, farenheit_temp;
+  farenheit_temp = Faren_temp;
+  celcius_temp = FartoCel (farenheit_temp);
+  kelvin_temp = CeltoKel(celcius_temp);
+  return kelvin_temp;
+}
+
+float Kel_to_Cel(float Kel_temp){
+  float kelvin_temp = Kel_temp;
+  float celcius_temp = kelvin_temp - 273.15;
+  return celcius_temp;
+}
+
+float Kel_to_Far(float Kel_temp){
+  float farenheit_temp;
+  float kelvin_temp = Kel_temp;
+  farenheit_temp = ((kelvin_temp - 273.15) * 9 / 5 ) + 32;
+  return farenheit_temp;
+}
+
+int main(){
+  USHORT continue_var = 1;
+  cout << "\n        "
+  <<"                             *This is a program to convert temparatures.*";
+  //continue loop
+  while (continue_var == 1){
+    cout << "\n\n Please select you conversion type with"
+    <<" the number given beside the choice";
+    cout << "\n\n 1. Celcius to Farenheit.\n 2. Celcius to Kelvin.\n 3. Farenheit to"
+    <<" Celcius.\n 4. Farenheit to Kelvin.\n 5. Kelvin to Celcius.\n 6. Kelvin to"
+    <<" Farenheit."<< endl;
+    cout <<"\n Please enter the number denoted by your choice here: ";
+    USHORT user_inp;
+    cin >> user_inp;
+    menu_input = user_inp;
+    curr_temp = input_sys(menu_input);
+
+    // Farenheit output
+    if (user_inp == 1 || user_inp == 6){
+      cout << "\n  Your temprature conversion is " << curr_temp
+      << " degrees Farenheit." << endl;
+    }
+    //Kelvin output
+    if ( user_inp == 2 || user_inp == 4){
+      cout << "\n  Your temprature conversion is " << curr_temp
+      << " Kelvin." << endl;
+    }
+    //Celcius output
+    if (user_inp == 3 || user_inp == 5){
+      cout << "\n  Your temprature conversion is " << curr_temp
+      << " degrees Celcius." << endl;
+    }
+    cout << "\n\n  Do you want to continue?  " << "\n  1.Yes \n  2.No"
+    << " \n\n  Enter your number here: ";
+    cin >> continue_var;
+  }
+  cout << "\n\n  Thank you for using converter.  :)" << endl;
+  return 0;
+}
+// end :)
