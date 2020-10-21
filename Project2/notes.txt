@@ -1,0 +1,8 @@
+Rectangle has functions for perimeter and area
+Square can set new size, give perimeter and area.
+Menus done
+
+ ________________ // Loop1
+|                | // Loop2
+|                | // Loop2
+|________________| // Loop3
